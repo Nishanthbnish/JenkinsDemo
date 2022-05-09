@@ -1,0 +1,264 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    // position: relative;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    overscroll-behavior: contain;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+:root {
+    --color-0: #c1b9a8;
+    --color-1: #4f735b;
+    --color-2: #ac8b12;
+    --color-3: #8d7576;
+    --color-4: #a63c30;
+    --nudge: 2vmin;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.quatro {
+    height: 90vmin;
+    width: 90vmin;
+    background-color: var(--color-0);
+    display: grid;
+    grid-template-rows: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.nav-list,
+.nav-item {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.nav-list {
+    grid-row: 1 / -1;
+    display: grid;
+    height: 100%;
+    counter-reset: list;
+    overscroll-behavior: contain;
+}
+
+.nav-item {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.8, 0, 0.3, 1);
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.3, 1);
+    animation-fill-mode: backwards;
+    &::before
+
+{
+    counter-increment: list;
+    content: counter(list);
+    position: absolute;
+    font-size: 8vmin;
+    line-height: 1;
+    mix-blend-mode: soft-light;
+    z-index: 1;
+}
+
+@for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+        z-index: calc(5 - #{$i});
+        animation-name: slide-down-#
+
+{
+    $i
+}
+
+;
+animation-delay: calc(#{$i} * 0.15s);
+background-color: var(--color-#{$i});
+
+@if $i == 1 {
+    --x: -1;
+    --y: -1;
+}
+
+@else if $i == 2 {
+    --x: 1;
+    --y: -1;
+}
+
+@else if $i == 3 {
+    --x: 1;
+    --y: 1;
+}
+
+@else if $i == 4 {
+    --x: -1;
+    --y: 1;
+}
+
+&::before {
+    animation: inherit;
+    animation-name: slide-up-#
+
+{
+    $i
+}
+
+;
+animation-delay: calc(#{$i} * 0.2s);
+@keyframes slide-up-# {
+    $i
+}
+
+{
+    from
+
+{
+    transform: translate(calc(var(--x) * 100vmax), calc(var(--y) * 100vmax));
+}
+
+to {
+    transform: none;
+}
+
+}
+}
+
+transform: translate(calc(var(--x) * 50%), calc(var(--y) * 50%));
+@keyframes slide-down-# {
+    $i
+}
+
+{
+    from
+
+{
+    transform: translate(calc(var(--x) * 100%), calc(var(--y) * 100%));
+    pointer-events: none;
+}
+
+to {
+    transform: translate(calc(var(--x) * 50%), calc(var(--y) * 50%));
+    pointer-events: none;
+}
+
+}
+
+@if $i != 4 {
+    &:focus {
+        transform: translate(calc(var(--x) * 5%), calc(var(--y) * 5%));
+        z-index: 99;
+        outline: none;
+    }
+
+    &:focus-within {
+        transform: translate(calc(var(--x) * 5%), calc(var(--y) * 5%));
+        z-index: 99;
+        .img
+
+{
+    transform: rotateZ(0deg) scale(1);
+    opacity: 1;
+}
+
+}
+}
+}
+}
+
+&:nth-child(1) {
+    &:hover:not(:focus)
+
+{
+    transform: translate(calc(-50% + var(--nudge)), -50%);
+}
+
+&::before {
+    right: 2vmin;
+    bottom: 1vmin;
+}
+
+}
+
+&:nth-child(2) {
+    &:hover:not(:focus)
+
+{
+    transform: translate(50%, calc(-50% + var(--nudge)));
+}
+
+&::before {
+    left: 2vmin;
+    bottom: 1vmin;
+}
+
+}
+
+&:nth-child(3) {
+    &:hover:not(:focus)
+
+{
+    transform: translate(calc(50% - var(--nudge)), 50%);
+}
+
+&::before {
+    left: 2vmin;
+    top: 1vmin;
+}
+
+}
+
+&:nth-child(4) {
+    &::before
+
+{
+    content: 'Home';
+    right: 2vmin;
+    top: 1vmin;
+}
+
+}
+}
+
+img {
+    display: block;
+    margin: 0;
+    object-fit: cover;
+    height: 100%;
+}
+
+.img-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vmin;
+    height: 60vmin;
+    overflow: hidden;
+    border-radius: 0.3vmin;
+    mix-blend-mode: overlay;
+}
+
+.img {
+    transform: rotateZ(20deg) scale(1.5);
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.5, 0, 0.3, 1);
+    border-radius: inherit;
+}

@@ -1,0 +1,41 @@
+﻿<div class="img-slider__container-1">
+    <div class="img-items">
+        <img src="~/image/4.jpeg" alt="" style="width:200px;height:200px";><h1><span style="background-color: #FFFF00">Rukkumaya........</span></h1>
+    </div>
+    <div class="img-items">
+        <img src="~/image/1.jpeg" alt="" style="width:200px;height:200px";><h1><span style="background-color: #FFFF00">Niranjaaaaaaaaan</span></h1>
+    </div>
+    <div class="img-items">
+        <img src="~/image/5.jpeg" alt="" style="width:200px;height:200px";"><h1><span style="background-color: #FFFF00">Anandhanner......</span></h1>
+    </div>
+    <div class="img-items">
+        <img src="~/image/6.jpeg" alt="" style="width:200px;height:200px";">
+    </div>
+    <div class="img-items">
+        <img src="~/image/3.jpeg" alt="" style="width:200px;height:200px";">
+    </div>
+</div>
+<style>
+    body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.img-slider__container-1 {
+    display: flex;
+    column-gap: 20px;
+    width: 100%;
+    overflow: auto;
+    justify-content: start;
+    align-items: center;
+    .img-items {
+        width: 100%;
+        img {
+            width: var(--img-width);
+            &.img-active {
+                transform: translateX(-100%);
+            }
+        }
+    }
+}
+</style>
